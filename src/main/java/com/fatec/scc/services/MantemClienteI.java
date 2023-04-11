@@ -48,13 +48,16 @@ public class MantemClienteI implements MantemCliente {
 		return repository.findById(id);
 	}
 
-	@Override
-	public Optional<Cliente> save(Cliente cliente) {
-		logger.info(">>>>>> servico save chamado ");
-		Endereco endereco = obtemEndereco(cliente.getCep());
-		cliente.setEndereco(endereco.getLogradouro());
-		return Optional.ofNullable(repository.save(cliente));
+	
+	@Override 
+	public Optional<Cliente> save(Cliente cliente) { 
+	 logger.info(">>>>>> servico save chamado "); 
+	 cliente.setDataCadastro(new DateTime()); 
+	 Endereco endereco = obtemEndereco(cliente.getCep()); 
+	 cliente.setEndereco(endereco.getLogradouro()); 
+	 return Optional.ofNullable(repository.save(cliente)); 
 	}
+
 
 	@Override
 	public void delete(Long id) {
